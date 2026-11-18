@@ -1,0 +1,22 @@
+{
+  // The site checks its own colors with pairlint. test/contrast.test.mjs runs the same pairs in CI.
+  "modes": {
+    "light": ["styles.css"],
+    "dark": ["styles.css", "styles.css#@media (prefers-color-scheme: dark)"]
+  },
+  "pairs": [
+    { "fg": ["text", "text-muted", "accent"], "bg": ["bg", "surface", "surface-strong"] },
+    { "fg": ["accent-strong", "pass", "fail"], "bg": ["bg", "surface"] },
+    { "fg": "border-strong", "bg": ["bg", "surface"], "use": "ui" },
+    { "fg": "on-accent", "bg": ["accent", "accent-strong"] },
+    { "fg": "pass", "bg": "pass-bg" },
+    { "fg": "fail", "bg": "fail-bg" },
+    { "fg": "term-*", "bg": "term-bg" },
+    {
+      "fg": "term-border",
+      "bg": "term-bg",
+      "use": "exempt",
+      "reason": "Decorative edge of the terminal frame. It carries no information."
+    }
+  ]
+}

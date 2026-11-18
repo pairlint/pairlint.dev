@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>pairlint: contrast checks for your whole design system</title>
+<meta name="description" content="pairlint is a free, MIT-licensed linter that checks WCAG contrast for every text and background pair in your design tokens, in every mode and every brand.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="pairlint: contrast checks for your whole design system">
+<meta property="og:description" content="Free, open-source WCAG contrast checks for every token pair, in light, dark, high contrast and every brand.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="pairlint home">
+      <svg viewBox="0 0 28 28" aria-hidden="true" focusable="false">
+        <rect x="2" y="2" width="16" height="16" rx="4" fill="currentColor"/>
+        <rect x="10" y="10" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/>
+      </svg>
+      pairlint
+    </a>
+    <nav aria-label="Main">
+      <ul class="nav">
+        <li class="nav-secondary"><a href="#use-cases">Use cases</a></li>
+        <li class="nav-secondary"><a href="#features">Features</a></li>
+        <li class="nav-secondary"><a href="#trust">Security</a></li>
+        <li><a class="button button-primary" href="https://github.com/pairlint/pairlint">GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Design token contrast linter</span>
+        <h1>Contrast checks for your whole design system, not one color pair at a time.</h1>
+        <p class="lede">pairlint checks WCAG 2.2 contrast for every text and background pair in your tokens, in every mode: light, dark, high contrast and every brand and theme combination. When a pair fails, it tells you which line to change and what to change it to.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://github.com/pairlint/pairlint">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+            View on GitHub
+          </a>
+          <a class="button button-secondary" href="https://github.com/pairlint/pairlint#readme">Read the docs</a>
+        </div>
+        <ul class="badges" aria-label="Project facts">
+          <li>Free</li>
+          <li>MIT licensed</li>
+          <li>Zero runtime dependencies</li>
+          <li>Works offline</li>
+        </ul>
+        <p class="status-note">pairlint is in active development and not on npm yet. Watch the repo on GitHub to hear about the first release.</p>
+      </div>
+
+      <figure class="terminal" aria-labelledby="hero-terminal-caption">
+        <div class="terminal-bar">
+          <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span id="hero-terminal-caption">pairlint output for a light and dark token set</span>
+        </div>
+<pre tabindex="0"><code><span class="t-bold">dark</span>
+  <span class="t-fail">✗</span> color.text.secondary on color.surface.raised
+    <span class="t-fail">4.37:1</span> (#80868b on #202124), needs 4.5:1 for body text <span class="t-dim">(WCAG 1.4.3 AA)</span>
+    <span class="t-accent">Try: point color.text.secondary at {color.gray.400} (6.09:1)</span>
+    <span class="t-dim">tokens/dark.json:6:7</span>
+  <span class="t-pass">✓</span> 11 pairs pass
+
+<span class="t-bold">1 failed, 23 passed across 2 modes (WCAG AA)</span></code></pre>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section-alt" id="problem" aria-labelledby="problem-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The problem</span>
+        <h2 id="problem-title">You check one pair. You ship hundreds.</h2>
+        <p>Contrast checkers test the two colors you paste in. A real design system has hundreds of text and background pairs, and every one of them changes in dark mode, in high contrast and in your second brand. Nobody pastes all of those in, so the failures ship.</p>
+      </div>
+
+      <div class="compare">
+        <div class="card">
+          <h3>A contrast checker</h3>
+          <p class="muted">You paste in the muted text color and the surface it sits on, in the theme you happen to be looking at.</p>
+          <div class="single-pair">
+            <span class="swatch-pair" aria-hidden="true"><span class="swatch sw-475569"></span><span class="swatch sw-ffffff"></span></span>
+            <span><code>#475569</code> on <code>#ffffff</code></span>
+          </div>
+          <p><strong>7.57:1. Looks fine.</strong></p>
+        </div>
+
+        <div class="card">
+          <h3>pairlint</h3>
+          <p class="muted">The same token file, with two brands and two themes. pairlint checks all 36 pairs in all 4 combinations.</p>
+          <ul class="mode-grid">
+            <li class="mode">
+              <span class="mode-name">acme/light</span>
+              <span class="mode-result is-pass"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 13.6 4.4 10l-1.4 1.4L8 16.4l9-9L15.6 6z"/></svg>All 9 pass</span>
+            </li>
+            <li class="mode">
+              <span class="mode-name">acme/dark</span>
+              <span class="mode-result is-fail"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="m5.4 4 4.6 4.6L14.6 4 16 5.4 11.4 10l4.6 4.6-1.4 1.4-4.6-4.6L5.4 16 4 14.6 8.6 10 4 5.4z"/></svg>7 fail</span>
+              <span class="mode-detail">2 pass</span>
+            </li>
+            <li class="mode">
+              <span class="mode-name">zen/light</span>
+              <span class="mode-result is-fail"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="m5.4 4 4.6 4.6L14.6 4 16 5.4 11.4 10l4.6 4.6-1.4 1.4-4.6-4.6L5.4 16 4 14.6 8.6 10 4 5.4z"/></svg>3 fail</span>
+              <span class="mode-detail">6 pass</span>
+            </li>
+            <li class="mode">
+              <span class="mode-name">zen/dark</span>
+              <span class="mode-result is-fail"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="m5.4 4 4.6 4.6L14.6 4 16 5.4 11.4 10l4.6 4.6-1.4 1.4-4.6-4.6L5.4 16 4 14.6 8.6 10 4 5.4z"/></svg>5 fail</span>
+              <span class="mode-detail">4 pass</span>
+            </li>
+          </ul>
+          <p class="small muted">15 failed, 21 passed across 4 modes. The light theme you were looking at was the only one that passed. Every count above is real output from the <a href="https://github.com/pairlint/pairlint/tree/main/packages/cli/test/fixtures">test fixtures in the repo</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="use-cases" aria-labelledby="use-cases-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Use cases</span>
+        <h2 id="use-cases-title">Built for the way design systems actually change</h2>
+        <p>Adding a theme, launching a brand, reviewing a token change. These are the moments contrast breaks, so these are the moments pairlint is built for.</p>
+      </div>
+
+      <div class="use-cases">
+
+        <article class="use-case" aria-labelledby="uc-dark">
+          <div>
+            <p class="who">Design system teams</p>
+            <h3 id="uc-dark">Add dark mode without guessing</h3>
+            <p>Your light theme passed review years ago. Dark mode reuses the same token names with new values, and some of those values are a shade too close to the new surfaces. pairlint checks every pair in both themes and points at the exact token to change.</p>
+            <ul class="checks">
+              <li>File, line and column for every failure</li>
+              <li>Suggests the nearest passing shade from your own scale, so the system stays intact</li>
+              <li>When no shade works, an exact new value with only the lightness changed</li>
+            </ul>
+          </div>
+          <figure class="terminal" aria-labelledby="uc-dark-caption">
+            <div class="terminal-bar">
+              <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              <span id="uc-dark-caption">pairlint explain, one pair in detail</span>
+            </div>
+<pre tabindex="0"><code><span class="t-dim">$</span> pairlint explain text-muted surface-raised
+text-muted on surface-raised (acme/dark)
+  <span class="t-fail">✗ 3.07:1</span> (#64748b on #1e293b), needs 4.5:1 for body text <span class="t-dim">(WCAG 1.4.3 AA)</span>
+  foreground  text-muted → gray-500
+              #64748b  <span class="t-dim">theme.css:21:3</span>
+  background  surface-raised → gray-800
+              #1e293b  <span class="t-dim">theme.css:23:3</span>
+  base        #0f172a
+  blended     #64748b on #1e293b
+  <span class="t-accent">Try: point text-muted at var(--gray-400) (5.70:1)</span></code></pre>
+          </figure>
+        </article>
+
+        <article class="use-case" aria-labelledby="uc-brands">
+          <div>
+            <p class="who">Multi-brand companies</p>
+            <h3 id="uc-brands">Every brand, every theme, one run</h3>
+            <p>Two brands and two themes are four products to check. Five brands with light, dark and high contrast are fifteen. Describe your brands and themes as groups and pairlint checks every combination on its own, up to 256 of them.</p>
+            <ul class="checks">
+              <li>Brand × theme modes named like <code>acme/dark</code></li>
+              <li>A theme can override a brand, the way your CSS does</li>
+              <li>Check a pair only where it applies, such as <code>"modes": ["dark"]</code></li>
+            </ul>
+          </div>
+          <figure class="terminal" aria-labelledby="uc-brands-caption">
+            <div class="terminal-bar">
+              <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              <span id="uc-brands-caption">The second brand fails where the first one passed</span>
+            </div>
+<pre tabindex="0"><code><span class="t-bold">zen/light</span>
+  <span class="t-fail">✗</span> brand-primary on surface
+    <span class="t-fail">3.38:1</span> (#03a14a on #ffffff), needs 4.5:1 for body text <span class="t-dim">(WCAG 1.4.3 AA)</span>
+    <span class="t-accent">Try: set brand-primary to #008933, or oklch(54.5% 0.17 150) (4.53:1)</span>
+    <span class="t-dim">brands.css:6:3</span>
+  <span class="t-fail">✗</span> on-brand on brand-primary
+    <span class="t-fail">3.38:1</span> (#ffffff on #03a14a), needs 4.5:1 for body text <span class="t-dim">(WCAG 1.4.3 AA)</span>
+    <span class="t-accent">Try: set on-brand to #252525, or oklch(26.6% 0 0) (4.52:1)</span>
+    <span class="t-dim">theme.css:16:3</span>
+  <span class="t-pass">✓</span> 6 pairs pass
+
+<span class="t-bold">15 failed, 21 passed across 4 modes (WCAG AA)</span></code></pre>
+          </figure>
+        </article>
+
+        <article class="use-case" aria-labelledby="uc-ci">
+          <div>
+            <p class="who">Engineering and CI</p>
+            <h3 id="uc-ci">Stop contrast regressions at the pull request</h3>
+            <p>Run pairlint on every token change. It exits with code 1 when a pair fails, writes a Markdown summary for the pull request, and writes SARIF so failures show up as code scanning annotations on the token's own line.</p>
+            <ul class="checks">
+              <li>Clear exit codes: 0 pass, 1 fail, 2 broken config</li>
+              <li>Markdown for PR comments and job summaries</li>
+              <li>SARIF 2.1.0 for GitHub code scanning</li>
+              <li>Baselines let you turn it on today and fail only on new problems</li>
+            </ul>
+          </div>
+          <div class="pr-comment">
+            <div class="pr-comment-head">Job summary, written with <code>--format markdown</code></div>
+            <div class="pr-comment-body">
+              <h4>pairlint: 4 contrast failures</h4>
+              <p class="small muted">4 failed, 20 passed, 6 exempt across 2 modes (WCAG AA).</p>
+              <div class="table-scroll" tabindex="0" role="region" aria-label="Failures table">
+                <table>
+                  <thead>
+                    <tr><th scope="col">Mode</th><th scope="col">Foreground</th><th scope="col">Background</th><th scope="col">Contrast</th><th scope="col">Needs</th><th scope="col">Suggested fix</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>dark</td><td><code>color.border.default</code></td><td><code>color.surface.overlay</code></td><td>2.23:1</td><td>3:1 UI</td><td><code>{color.gray.500}</code> (3.66:1)</td></tr>
+                    <tr><td>dark</td><td><code>color.border.default</code></td><td><code>color.surface.raised</code></td><td>2.66:1</td><td>3:1 UI</td><td><code>{color.gray.500}</code> (4.37:1)</td></tr>
+                    <tr><td>dark</td><td><code>color.text.secondary</code></td><td><code>color.surface.overlay</code></td><td>3.66:1</td><td>4.5:1 body text</td><td><code>{color.gray.400}</code> (5.11:1)</td></tr>
+                    <tr><td>dark</td><td><code>color.text.secondary</code></td><td><code>color.surface.raised</code></td><td>4.37:1</td><td>4.5:1 body text</td><td><code>{color.gray.400}</code> (6.09:1)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="use-case" aria-labelledby="uc-designers">
+          <div>
+            <p class="who">Designers and reviewers</p>
+            <h3 id="uc-designers">A report designers can actually read</h3>
+            <p>Not everyone reads terminal output. The HTML report is one self-contained page with color samples, ratios and a preview of each suggested fix, in light and dark themes. It has no scripts and loads nothing from the network, so you can attach it to a ticket or open it offline.</p>
+            <ul class="checks">
+              <li>Swatches for every pair, failing and passing</li>
+              <li>Each fix shown next to the color it replaces</li>
+              <li>The report meets WCAG AA itself, and a test checks that</li>
+            </ul>
+          </div>
+          <div class="report" role="img" aria-label="Example HTML report: color.text.secondary on color.surface.raised fails at 4.37 to 1. Suggested fix, color.gray.400, passes at 6.09 to 1.">
+            <p class="report-title">Contrast report</p>
+            <p class="report-meta">4 failed, 20 passed, 6 exempt. WCAG AA, 2 modes.</p>
+            <div class="report-row">
+              <span class="swatch-pair"><span class="swatch sw-80868b"></span><span class="swatch sw-202124"></span></span>
+              <div>
+                <div class="pair-name"><code>color.text.secondary</code> on <code>color.surface.raised</code></div>
+                <span class="ratio">4.37:1</span><span class="badge badge-fail">Fails</span>
+              </div>
+              <div class="fix-preview">
+                <span>Try <code>{color.gray.400}</code></span>
+                <span class="swatch-pair"><span class="swatch sw-9aa0a6"></span><span class="swatch sw-202124"></span></span>
+                <span class="ratio">6.09:1</span><span class="badge badge-pass">Passes</span>
+              </div>
+            </div>
+            <div class="report-row">
+              <span class="swatch-pair"><span class="swatch sw-64748b"></span><span class="swatch sw-1e293b"></span></span>
+              <div>
+                <div class="pair-name"><code>text-muted</code> on <code>surface-raised</code></div>
+                <span class="ratio">3.07:1</span><span class="badge badge-fail">Fails</span>
+              </div>
+              <div class="fix-preview">
+                <span>Try <code>var(--gray-400)</code></span>
+                <span class="swatch-pair"><span class="swatch sw-94a3b8"></span><span class="swatch sw-1e293b"></span></span>
+                <span class="ratio">5.70:1</span><span class="badge badge-pass">Passes</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt" id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">What it checks</span>
+        <h2 id="features-title">Exact answers, not close enough</h2>
+        <p>A contrast tool that rounds is a contrast tool that lies. pairlint does the math the way the spec and the browser do it.</p>
+      </div>
+
+      <div class="features">
+        <div class="card">
+          <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 4h10l6 6v10H4z M14 4v6h6"/></svg></span>
+          <h3>Reads the tokens you already have</h3>
+          <p class="muted">W3C Design Tokens (DTCG), Tokens Studio, Style Dictionary 3 and CSS custom properties, including <code>:root</code>, theme selectors and <code>@media (prefers-color-scheme)</code>. Aliases are followed, and several files merge per mode.</p>
+        </div>
+        <div class="card">
+          <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+          <h3>Points at the line to fix</h3>
+          <p class="muted">Every failure comes with the file, line and column of the token to change, and the smallest change that passes: a shade from your own scale first, or an exact lightness-only value.</p>
+        </div>
+        <div class="card">
+          <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 7h14M5 12h14M5 17h8"/></svg></span>
+          <h3>No rounding, ever</h3>
+          <p class="muted">The report never rounds a failure up.</p>
+          <ul class="math-examples">
+            <li><span>4.49:1 needs 4.5:1</span><span class="is-fail">Fails</span></li>
+            <li><span>4.499:1 needs 4.5:1</span><span class="is-fail">Fails</span></li>
+            <li><span>4.50:1 needs 4.5:1</span><span class="is-pass">Passes</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="9" y="9" width="12" height="12" rx="2" fill="currentColor" opacity=".45"/></svg></span>
+          <h3>Translucency done like a browser</h3>
+          <p class="muted">A translucent foreground is blended over its background before measuring. A translucent background is blended over the mode's base color first. The result matches what people actually see.</p>
+        </div>
+        <div class="card">
+          <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M12 3a9 9 0 0 1 0 18z"/></svg></span>
+          <h3>Modern color spaces</h3>
+          <p class="muted">Hex, <code>rgb()</code>, <code>hsl()</code>, <code>oklch()</code>, <code>oklab()</code> and Display P3. Colors outside sRGB are mapped with the CSS Color 4 gamut mapping algorithm, and pairlint tells you those results are approximate.</p>
+        </div>
+        <div class="card">
+          <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 20V5a1 1 0 0 1 1-1h11l4 4v12z M8 12h8M8 16h5"/></svg></span>
+          <h3>Baselines with an owner</h3>
+          <p class="muted">Adopting on a big system? Record today's failures and fail only on new ones. Every accepted failure needs an owner and a reason, can expire on a date, and comes back as a failure when it does.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reports" aria-labelledby="reports-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Reports</span>
+        <h2 id="reports-title">One check, a report for everyone</h2>
+        <p>Pick a format with <code>--format</code> and write it anywhere with <code>--output</code>.</p>
+      </div>
+      <ul class="formats">
+        <li><span class="format-name">text</span><p>For you in a terminal. Failures grouped by mode, with fixes and file locations.</p></li>
+        <li><span class="format-name">json</span><p>For scripts. Every result, ratio, color, suggestion and location, with a versioned schema.</p></li>
+        <li><span class="format-name">sarif</span><p>For GitHub code scanning. Failures show as annotations on the token's line in pull requests.</p></li>
+        <li><span class="format-name">markdown</span><p>For pull request comments and job summaries. A short summary and a table of fixes.</p></li>
+        <li><span class="format-name">html</span><p>For designers and stakeholders. One self-contained page with swatches, in light and dark.</p></li>
+        <li><span class="format-name">GitHub annotations</span><p>For workflow logs. Failures appear inline on the changed token files.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-alt" id="trust" aria-labelledby="trust-title">
+    <div class="wrap trust-grid">
+      <div>
+        <span class="eyebrow">Security</span>
+        <h2 id="trust-title">Small enough to trust</h2>
+        <p class="lede">A linter runs on every developer's laptop and in every CI job. It should not be able to do anything except read your tokens and print a report. pairlint is built that way on purpose.</p>
+        <p class="muted">CI checks the code for network, process and <code>eval</code> access on every change. Read the <a href="https://github.com/pairlint/pairlint/blob/main/SECURITY.md">security policy</a>.</p>
+      </div>
+      <ul class="trust-list">
+        <li><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 13.6 4.4 10l-1.4 1.4L8 16.4l9-9L15.6 6z"/></svg><div><strong>Zero runtime dependencies</strong><span>Nothing else gets installed with it, so there is no dependency tree to audit.</span></div></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 13.6 4.4 10l-1.4 1.4L8 16.4l9-9L15.6 6z"/></svg><div><strong>No network access</strong><span>It makes no requests and works fully offline.</span></div></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 13.6 4.4 10l-1.4 1.4L8 16.4l9-9L15.6 6z"/></svg><div><strong>No install scripts</strong><span>Installing it runs nothing.</span></div></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 13.6 4.4 10l-1.4 1.4L8 16.4l9-9L15.6 6z"/></svg><div><strong>Reads only your project folder</strong><span>It only opens files inside the folder that holds its config.</span></div></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 13.6 4.4 10l-1.4 1.4L8 16.4l9-9L15.6 6z"/></svg><div><strong>Never runs your code</strong><span>Token files are parsed as data. JavaScript configs are never evaluated.</span></div></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 13.6 4.4 10l-1.4 1.4L8 16.4l9-9L15.6 6z"/></svg><div><strong>MIT licensed</strong><span>Read every line, fork it, ship it in your own tools.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="roadmap" aria-labelledby="roadmap-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Coming soon</span>
+        <h2 id="roadmap-title">What's next</h2>
+        <p>These are planned and not available yet. Follow along in the <a href="https://github.com/pairlint/pairlint/issues">issues</a>.</p>
+      </div>
+      <ul class="roadmap">
+        <li><span class="soon">Coming soon</span><h3>npm release</h3><p>The first published version, so you can install it with npm and run it in any project.</p></li>
+        <li><span class="soon">Coming soon</span><h3>GitHub Action</h3><p>One step in your workflow that runs the check and posts the summary and annotations for you.</p></li>
+        <li><span class="soon">Coming soon</span><h3><code>pairlint init</code></h3><p>Finds your token files and writes a starting config, so the first run takes a minute.</p></li>
+        <li><span class="soon">Coming soon</span><h3>Figma plugin</h3><p>The same checks inside Figma, for the people who pick the colors in the first place.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-alt oss" id="open-source" aria-labelledby="oss-title">
+    <div class="wrap">
+      <span class="eyebrow">Free and open source</span>
+      <h2 id="oss-title">Free for everyone</h2>
+      <p class="lede">pairlint is MIT licensed. There is no paid tier, no account and no telemetry. Use it at work, read the source, open an issue or send a pull request.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="https://github.com/pairlint/pairlint">Star it on GitHub</a>
+        <a class="button button-secondary" href="https://github.com/pairlint/pairlint/blob/main/CONTRIBUTING.md">Contribute</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>pairlint is free and open source under the <a href="https://github.com/pairlint/pairlint/blob/main/LICENSE">MIT license</a>. This site has no cookies, no tracking and no JavaScript.</p>
+    <ul>
+      <li><a href="https://github.com/pairlint/pairlint">GitHub</a></li>
+      <li><a href="https://github.com/pairlint/pairlint#readme">Docs</a></li>
+      <li><a href="https://github.com/pairlint/pairlint/blob/main/CHANGELOG.md">Changelog</a></li>
+      <li><a href="https://github.com/pairlint/pairlint/blob/main/SECURITY.md">Security</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

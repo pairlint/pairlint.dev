@@ -1,0 +1,13 @@
+{
+  "name": "pairlint-site",
+  "private": true,
+  "type": "module",
+  "description": "The pairlint website. Plain HTML and CSS, no build step.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
