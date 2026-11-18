@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <style>rect{fill:#3a2ec4;stroke:#3a2ec4}@media (prefers-color-scheme:dark){rect{fill:#aab5ff;stroke:#aab5ff}}</style>
+  <rect x="2" y="2" width="16" height="16" rx="4"/>
+  <rect x="10" y="10" width="16" height="16" rx="4" style="fill:none" stroke-width="2.5"/>
+</svg>
