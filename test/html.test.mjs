@@ -85,8 +85,37 @@ test("unreleased things are not presented as available", () => {
   // pairlint is not on npm yet.
   assert.doesNotMatch(html, /npx pairlint|npm install/);
   const roadmap = html.slice(html.indexOf('id="roadmap"'), html.indexOf('id="open-source"'));
-  for (const item of ["npm release", "GitHub Action", "pairlint init", "Figma plugin"]) {
+  for (const item of ["npm release", "The pairlint GitHub Action", "pairlint init", "pairlint for Figma"]) {
     assert.ok(roadmap.includes(item), `${item} should be listed under Coming soon`);
   }
   assert.equal(roadmap.match(/class="soon">Coming soon</g)?.length, 4);
+});
+
+test("wording never claims compliance, certification or endorsement", () => {
+  const text = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+  const disclaimer =
+    "pairlint checks color contrast, which is one part of WCAG. Passing does not make a product accessible or WCAG conformant. pairlint is not affiliated with or endorsed by W3C, Figma or GitHub. WCAG is a W3C standard. Figma and GitHub are trademarks of their owners.";
+  assert.ok(text.includes(disclaimer), "the footer disclaimer is missing or changed");
+  const rest = text.replace(disclaimer, "");
+  for (const phrase of [
+    /\bcomplian/i,
+    /\bconform/i,
+    /\bcertif/i,
+    /\bguarantee/i,
+    /\blawsuit/i,
+    /\bofficial/i,
+    /\bADA\b/,
+    /\bendorse/i,
+    /\baccessible\b/i,
+    /\bmeets WCAG/i,
+    /\bFigma plugin\b/i,
+  ]) {
+    assert.doesNotMatch(rest, phrase);
+  }
+});
+
+test("no third-party logos", () => {
+  // The GitHub mark starts with this path. W3C, WAI and Figma logos are not used either.
+  assert.doesNotMatch(html, /d="M12 \.5a11\.5/);
+  assert.doesNotMatch(html, /<img/i);
 });
