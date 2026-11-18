@@ -6,10 +6,10 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <title>pairlint: contrast checks for your whole design system</title>
-<meta name="description" content="pairlint is a free, MIT-licensed linter that checks WCAG contrast for every text and background pair in your design tokens, in every mode and every brand.">
+<meta name="description" content="pairlint is a free, MIT-licensed linter that checks color contrast against WCAG 2.2 for every text and background pair in your design tokens, in every mode and every brand.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:title" content="pairlint: contrast checks for your whole design system">
-<meta property="og:description" content="Free, open-source WCAG contrast checks for every token pair, in light, dark, high contrast and every brand.">
+<meta property="og:description" content="Free, open-source checks of color contrast against WCAG 2.2 for every token pair, in light, dark, high contrast and every brand.">
 <meta property="og:type" content="website">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
@@ -44,10 +44,9 @@
       <div>
         <span class="eyebrow">Design token contrast linter</span>
         <h1>Contrast checks for your whole design system, not one color pair at a time.</h1>
-        <p class="lede">pairlint checks WCAG 2.2 contrast for every text and background pair in your tokens, in every mode: light, dark, high contrast and every brand and theme combination. When a pair fails, it tells you which line to change and what to change it to.</p>
+        <p class="lede">pairlint checks color contrast against WCAG 2.2 for every text and background pair in your tokens, in every mode: light, dark, high contrast and every brand and theme combination. When a pair fails, it tells you which line to change and what to change it to.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="https://github.com/pairlint/pairlint">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
             View on GitHub
           </a>
           <a class="button button-secondary" href="https://github.com/pairlint/pairlint#readme">Read the docs</a>
@@ -239,7 +238,7 @@ text-muted on surface-raised (acme/dark)
             <ul class="checks">
               <li>Swatches for every pair, failing and passing</li>
               <li>Each fix shown next to the color it replaces</li>
-              <li>The report meets WCAG AA itself, and a test checks that</li>
+              <li>The report's own colors pass the WCAG AA contrast ratios, and a test checks that</li>
             </ul>
           </div>
           <div class="report" role="img" aria-label="Example HTML report: color.text.secondary on color.surface.raised fails at 4.37 to 1. Suggested fix, color.gray.400, passes at 6.09 to 1.">
@@ -370,9 +369,9 @@ text-muted on surface-raised (acme/dark)
       </div>
       <ul class="roadmap">
         <li><span class="soon">Coming soon</span><h3>npm release</h3><p>The first published version, so you can install it with npm and run it in any project.</p></li>
-        <li><span class="soon">Coming soon</span><h3>GitHub Action</h3><p>One step in your workflow that runs the check and posts the summary and annotations for you.</p></li>
+        <li><span class="soon">Coming soon</span><h3>The pairlint GitHub Action</h3><p>One step in your workflow that runs the check and posts the summary and annotations for you.</p></li>
         <li><span class="soon">Coming soon</span><h3><code>pairlint init</code></h3><p>Finds your token files and writes a starting config, so the first run takes a minute.</p></li>
-        <li><span class="soon">Coming soon</span><h3>Figma plugin</h3><p>The same checks inside Figma, for the people who pick the colors in the first place.</p></li>
+        <li><span class="soon">Coming soon</span><h3>pairlint for Figma</h3><p>The same contrast checks inside Figma, for the people who pick the colors in the first place.</p></li>
       </ul>
     </div>
   </section>
@@ -394,6 +393,7 @@ text-muted on surface-raised (acme/dark)
 <footer class="site-footer">
   <div class="wrap">
     <p>pairlint is free and open source under the <a href="https://github.com/pairlint/pairlint/blob/main/LICENSE">MIT license</a>. This site has no cookies, no tracking and no JavaScript.</p>
+    <p class="disclaimer">pairlint checks color contrast, which is one part of WCAG. Passing does not make a product accessible or WCAG conformant. pairlint is not affiliated with or endorsed by W3C, Figma or GitHub. WCAG is a W3C standard. Figma and GitHub are trademarks of their owners.</p>
     <ul>
       <li><a href="https://github.com/pairlint/pairlint">GitHub</a></li>
       <li><a href="https://github.com/pairlint/pairlint#readme">Docs</a></li>

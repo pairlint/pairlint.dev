@@ -22,7 +22,7 @@ npm test
 
 They check that:
 
-- Every text and background color pair meets WCAG 2.2 AA in light and dark. It is a contrast tool, so its own site has to pass.
+- Every text and background color pair passes the WCAG 2.2 AA contrast ratios in light and dark. It is a contrast tool, so its own site has to pass.
 - Colors only come from the tokens at the top of `styles.css`, so nothing slips past the contrast test.
 - Ratios quoted on the page match the colors shown next to them.
 - The page has no scripts or inline styles, every link resolves, and every scrollable area works with a keyboard.
